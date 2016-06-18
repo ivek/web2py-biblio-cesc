@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+<h3>Busqueda Dinámica</h3>
+{{=form}}
+<hr>
+{{if len(results) > 0 :}}
+<h4>Datos Encontrados <h4>
+{{=results}}
+{{pass}}

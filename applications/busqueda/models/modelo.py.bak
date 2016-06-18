@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+db.define_table('catalogoxtipo',
+Field('cod_articulo','integer'),
+Field('marca','string',length = 20),
+Field('tipo','string',length = 20),
+Field('descripcion','string',length = 50),
+Field('foto','upload'))

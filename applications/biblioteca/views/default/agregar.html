@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+<h1>Libros registrados</h1>
+<ul>
+{{for biblioteca in libros:}}
+{{=LI(A(biblioteca.titulo, _href=URL("mostrar", args=biblioteca.id)))}}
+{{pass}}
+</ul>

@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# intente algo como
+db = DAL("sqlite://storage.sqlite")
+db.define_table('biblioteca',
+   Field('folio '),
+   Field('titulo'),
+   Field('unidades'),
+   Field('editoria '),
+   Field('autor '),
+   Field('descripcion'),
+   Field('genero '),
+   Field('status '),
+   Field('docente'),
+   Field('fecha_salida'),
+   Field('fecha_salida'),
+   Field('archivo', 'upload'),)

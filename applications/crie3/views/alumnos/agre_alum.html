@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+<h1>Alumnos registrados</h1>
+<ul>
+{{for alumnos in alumno:}}
+{{=LI(A(alumnos.nombre, _href=URL("mostrar", args=alumnos.id)))}}
+{{pass}}
+</ul>
