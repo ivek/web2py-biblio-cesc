@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.UnboundLocalError'> local variable 'x' referenced before assignment"
+p3
+sS'layer'
+p4
+S'/home/ghost/Descargas/aplicacion/web2py/applications/crie3/controllers/alumnos.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n#p\xc3\xa1gina para visualizar nombre y links\ndef agre_alum():\n    alumno = db().select(db.alumnos.ALL, orderby=db.alumnos.nombre)\n    return dict(alumno=alumno)\n#muestra el grid\ndef mostrar():\n    grid = SQLFORM.smartgrid(db.alumnos, linked_tables=[\'nombre\'])\n    return dict(grid=grid)\n#saca la estadistica seg\xc3\xban los parametros que se impongan.\ndef estadistica():\n    contador = 0\n    base = db(db.especialistas).select()\n    base2 = db(db.escuela).select()\n# formulario para seleccionar el nombre de elemento a buscar\n    formulario= FORM( TR("ESPECIALISTA: ", \n          SELECT(_name=\'seleccion\', \n          *[OPTION(base[i].nombre, _value=str(base[i].nombre)) for i in range(len(base))])),\n          (TR("ESCUELA: ",SELECT(_name=\'seleccion2\', \n          *[OPTION(base2[i].clv_p, _value=str(base2[i].clv_p)) for i in range(len(base2))]),\n          INPUT(_type="submit"))))\n#hace la contabilidad del elemento seleccionado\n    asesor = request.vars.seleccion\n    asesor2 = request.vars.seleccion2\n    count = db.alumnos.escuela.count()\n    for row in db(db.alumnos.aso_esp!=request.vars.seleccion).select(db.alumnos.escuela, count, groupby=db.alumnos.escuela):\n         for x in db(db.alumnos.escuela==request.vars.seleccion2).select(db.alumnos.escuela, count, groupby=db.alumnos.escuela):\n            if  x == request.vars.seleccion2:\n                contador = contador +  row[count]\n    return dict(contador=contador, formulario=formulario, asesor2=asesor2,   asesor = asesor, x = x)\n\nresponse._vars=response._caller(estadistica)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/ghost/Descargas/aplicacion/web2py/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/home/ghost/Descargas/aplicacion/web2py/applications/crie3/controllers/alumnos.py", line 32, in <module>\n  File "/home/ghost/Descargas/aplicacion/web2py/gluon/globals.py", line 417, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/ghost/Descargas/aplicacion/web2py/applications/crie3/controllers/alumnos.py", line 30, in estadistica\n    return dict(contador=contador, formulario=formulario, asesor2=asesor2,   asesor = asesor, x = x)\nUnboundLocalError: local variable \'x\' referenced before assignment\n'
+p11
+s.

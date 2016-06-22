@@ -5,19 +5,26 @@ def agre_alum():
     return dict(alumno=alumno)
 #muestra el grid
 def mostrar():
-   grid = SQLFORM.smartgrid(db.alumnos, linked_tables=['nombre'])
-   return dict(grid=grid)
+    grid = SQLFORM.smartgrid(db.alumnos, linked_tables=['nombre'])
+    return dict(grid=grid)
 #saca la estadistica según los parametros que se impongan.
 def estadistica():
     contador = 0
-    base = db(db.alumnos).select()
+    base = db(db.especialistas).select()
+    base2 = db(db.escuela).select()
 # formulario para seleccionar el nombre de elemento a buscar
-    formulario= FORM( TR("busqueda: ", 
+    formulario= FORM( TR("ESPECIALISTA: ", 
           SELECT(_name='seleccion', 
           *[OPTION(base[i].nombre, _value=str(base[i].nombre)) for i in range(len(base))])),
-          TR(INPUT(_type='submit')),_action="estadistica")
+          (TR("ESCUELA: ",SELECT(_name='seleccion2', 
+          *[OPTION(base2[i].clv_p, _value=str(base2[i].clv_p)) for i in range(len(base2))]),
+          INPUT(_type="submit"))))
 #hace la contabilidad del elemento seleccionado
-    count = db.alumnos.id.count()
-    for row in db(db.alumnos.nombre==request.vars.seleccion).select(db.alumnos.nombre, count, groupby=db.alumnos.nombre):
-        contador = contador +  row[count]
-    return dict(contador=contador, supl=supl, formulario=formulario)
+    asesor = request.vars.seleccion
+    asesor2 = request.vars.seleccion2
+    count = db.alumnos.escuela.count()
+    for row in db(db.alumnos.aso_esp!=request.vars.seleccion).select(db.alumnos.escuela, count, groupby=db.alumnos.escuela):
+         for i in db(db.alumnos.escuela==request.vars.seleccion2).select(db.alumnos.escuela, count, groupby=db.alumnos.escuela):
+            if  i == request.vars.seeccion2:
+                contador = contador +  row[count]
+    return dict(contador=contador, formulario=formulario, asesor2=asesor2,   asesor = asesor)

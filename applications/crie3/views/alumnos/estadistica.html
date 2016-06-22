@@ -1,10 +1,32 @@
 {{extend 'layout.html'}}
 <h1>estadistica</h1>
-<table border=5 >
+{{=formulario}}
+<table id="result">
     <tr>
-        <td>{{=formulario}}</td>
-        <td>
-            {{=contador}}
-        </td>
-     
+        <td>Maestro Especialista: {{=asesor}}</td>
+        <td>Maestro escuela: {{=asesor2}}</td>
+         <td>i am row: {{=asesor2}}</td>
+    </tr>   
+    <tr>
+        <td>No. total escuelas:</td>
+    </tr>
+   <tr>
+        <td>No. alumnos en la escuela:  {{=contador}}</td>
+      
+    </tr>
+    <tr>
+        <td>No. Maestros en la escuela:</td>
+    </tr>
+    <tr>
+        <td>No. padres en la escuela:...</td>
+    </tr>
+   </table>
+   <table  id="result">
+     <tr>
+       <th>Nivel</th> 
+       <th>Clave</th>
+       <th>Grado</th>
+       <th>Grupo</th>
+       <th>Total</th>
+    </tr>
 </table>
