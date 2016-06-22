@@ -1,0 +1,803 @@
+(dp1
+S'output'
+p2
+S'<class \'sqlite3.OperationalError\'> near "ON": syntax error'
+p3
+sS'layer'
+p4
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\controllers/alumnos.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n#p\xc3\xa1gina para visualizar nombre y links\ndef agre_alum():\n    alumno = db().select(db.alumnos.ALL, orderby=db.alumnos.nombre)\n    return dict(alumno=alumno)\n#muestra el grid\ndef mostrar():\n    grid = SQLFORM.smartgrid(db.alumnos, linked_tables=[\'nombre\'])\n    return dict(grid=grid)\n#saca la estadistica seg\xc3\xban los parametros que se impongan.\ndef estadistica():\n    contador = 0\n    contar_esc = 0\n    contar_doc = 0\n    base = db(db.especialistas).select()\n    base2 = db(db.escuela).select()\n# formulario para seleccionar el nombre de elemento a buscar\n    formulario= FORM( TR("ESPECIALISTA: ", \n          SELECT(_name=\'seleccion\', \n          *[OPTION(base[i].nombre, _value=str(base[i].nombre)) for i in range(len(base))])),\n          (TR("ESCUELA: ",SELECT(_name=\'seleccion2\', \n          *[OPTION(base2[i].clv_p, _value=str(base2[i].clv_p)) for i in range(len(base2))]),\n          INPUT(_type="submit"))))\n#hace la contabilidad del elemento seleccionado\n    asesor = request.vars.seleccion\n    asesor2 = request.vars.seleccion2\n#busca las alumnos y asesor que coincidan\n    count =  db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select()\n    for Rows in count:\n             contador = contador + 1\n#busca los escuelas que coincidan con asesor\n    count2 =  db(db.alumnos.aso_esp==asesor).select(db.alumnos.escuela, distinct=True)\n    for Rows in count2:\n             contar_esc = contar_esc + 1\n#busca el numero de docentes en cada escuela\n    tmps = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.prof_aula, distinct = (db.alumnos.grupo))\n    for Rows in tmps:\n             contar_doc = contar_doc + 1\n    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2)\n\nresponse._vars=response._caller(estadistica)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__module__'
+p12
+S"'sqlite3'"
+p13
+sS'__getslice__'
+p14
+S"<method-wrapper '__getslice__' of OperationalError object>"
+p15
+sS'__str__'
+p16
+S"<method-wrapper '__str__' of OperationalError object>"
+p17
+sS'__reduce__'
+p18
+S'<built-in method __reduce__ of OperationalError object>'
+p19
+sS'__dict__'
+p20
+S'{}'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of OperationalError object>'
+p23
+sS'__weakref__'
+p24
+S'None'
+p25
+sS'__init__'
+p26
+S"<method-wrapper '__init__' of OperationalError object>"
+p27
+sS'__setattr__'
+p28
+S"<method-wrapper '__setattr__' of OperationalError object>"
+p29
+sS'__reduce_ex__'
+p30
+S'<built-in method __reduce_ex__ of OperationalError object>'
+p31
+sS'__new__'
+p32
+S'<built-in method __new__ of type object>'
+p33
+sS'__format__'
+p34
+S'<built-in method __format__ of OperationalError object>'
+p35
+sS'__class__'
+p36
+S"<class 'sqlite3.OperationalError'>"
+p37
+sS'__doc__'
+p38
+S'None'
+p39
+sS'__getitem__'
+p40
+S"<method-wrapper '__getitem__' of OperationalError object>"
+p41
+sS'__setstate__'
+p42
+S'<built-in method __setstate__ of OperationalError object>'
+p43
+sS'__getattribute__'
+p44
+S"<method-wrapper '__getattribute__' of OperationalError object>"
+p45
+sS'args'
+p46
+S'(\'near "ON": syntax error\',)'
+p47
+sS'__subclasshook__'
+p48
+S'<built-in method __subclasshook__ of type object>'
+p49
+sS'__unicode__'
+p50
+S'<built-in method __unicode__ of OperationalError object>'
+p51
+sS'__delattr__'
+p52
+S"<method-wrapper '__delattr__' of OperationalError object>"
+p53
+sS'__repr__'
+p54
+S"<method-wrapper '__repr__' of OperationalError object>"
+p55
+sS'__hash__'
+p56
+S"<method-wrapper '__hash__' of OperationalError object>"
+p57
+ssS'evalue'
+p58
+S'near "ON": syntax error'
+p59
+sS'request'
+p60
+cgluon.html
+XML_unpickle
+p61
+(S's\x94k\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>crie3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>alumnos</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-2e86e3cc-5991-49e6-aa90-e320192b787a<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_biblioteca</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-09e98b89-b76c-42c1-b4be-302811ef6e8b<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_crie3</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_welcome</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-dbad35db-1960-42eb-a1bb-922e6527f9c1<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div>244</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div>multipart/form-data; boundary=----WebKitFormBoundaryBBlNW48ZwCbDRISt</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>es-ES,es;q=0.8,en;q=0.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div>244</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div>multipart/form-data; boundary=----WebKitFormBoundaryBBlNW48ZwCbDRISt</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_biblioteca=127.0.0.1-09e98b89-b76c-42c1-b4be-302811ef6e8b; session_id_welcome=127.0.0.1-dbad35db-1960-42eb-a1bb-922e6527f9c1; session_id_crie3=127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917; session_id_admin=127.0.0.1-2e86e3cc-5991-49e6-aa90-e320192b787a</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8080</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ORIGIN</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8080</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8080/crie3/alumnos/estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_UPGRADE_INSECURE_REQUESTS</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/crie3/alumnos/estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>52340</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>POST</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>CRIE-PC</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>8080</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_SOFTWARE</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\crie3\\\\&#x27;, &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\welcome\\\\&#x27;, &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\admin\\\\&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x32db738: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;CRIE-PC&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;port&#x27;: 8000, &#x27;print_errors&#x27;: False, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27;******&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_length</td><td style="vertical-align:top;">:</td><td><div>244</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_type</td><td style="vertical-align:top;">:</td><td><div>multipart/form-data; boundary=----WebKitFormBoundaryBBlNW48ZwCbDRISt</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>es-ES,es;q=0.8,en;q=0.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_content_length</td><td style="vertical-align:top;">:</td><td><div>244</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_content_type</td><td style="vertical-align:top;">:</td><td><div>multipart/form-data; boundary=----WebKitFormBoundaryBBlNW48ZwCbDRISt</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_biblioteca=127.0.0.1-09e98b89-b76c-42c1-b4be-302811ef6e8b; session_id_welcome=127.0.0.1-dbad35db-1960-42eb-a1bb-922e6527f9c1; session_id_crie3=127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917; session_id_admin=127.0.0.1-2e86e3cc-5991-49e6-aa90-e320192b787a</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8080</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_origin</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8080</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8080/crie3/alumnos/estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_upgrade_insecure_requests</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>CRIE-PC</div></td></tr><tr><td><div>fe80::512a:1d78:31a:1aba%15</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>192.168.1.8</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/crie3/alumnos/estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>52340</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>POST</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/crie3/alumnos/estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>CRIE-PC</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>8080</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_software</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.14.6-stable+timestamp.2016.05.10.00.21.47</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x0058D0D0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x03293F10&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x0989B2B0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x0058D0D0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x03293F10&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x0989B2B0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\crie3\\\\&#x27;, &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\welcome\\\\&#x27;, &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\admin\\\\&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x32db738: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;CRIE-PC&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;port&#x27;: 8000, &#x27;print_errors&#x27;: False, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27;******&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>CRIE-PC</div></td></tr><tr><td><div>fe80::512a:1d78:31a:1aba%15</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>192.168.1.8</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.14.6-stable+timestamp.2016.05.10.00.21.47</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_scheduler</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2016, 6, 22, 12, 57, 56, 124000)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/crie3/alumnos/estadistica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2016, 6, 22, 17, 57, 56, 124000)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x09A57830&gt;</div></td></tr></table></div>'
+tRp62
+sS'frames'
+p63
+(lp64
+(dp65
+S'file'
+p66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\restricted.py'
+p67
+sS'dump'
+p68
+(dp69
+S'environment'
+p70
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p71
+sS'ccode'
+p72
+S'<code object <module> at 09234698, file "C:\\User...plications\\crie3\\controllers/alumnos.py", line 3>'
+p73
+ssS'lnum'
+p74
+I227
+sS'lines'
+p75
+(dp76
+I224
+S'            ccode = code'
+p77
+sI225
+S'        else:'
+p78
+sI226
+S'            ccode = compile2(code, layer)'
+p79
+sI227
+S'        exec ccode in environment'
+p80
+sI228
+S'    except HTTP:'
+p81
+sI229
+S'        raise'
+p82
+sI230
+S'    except RestrictedError:'
+p83
+sI231
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+sI222
+S'    try:'
+p85
+sI223
+S'        if isinstance(code, types.CodeType):'
+p86
+ssS'call'
+p87
+S"(code='# -*- coding: utf-8 -*-\\n#p\\xc3\\xa1gina para visualizar...2)\\n\\nresponse._vars=response._caller(estadistica)\\n', environment={'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}, layer=r'C:\\Users\\CRIE\\OneDrive\\aplicacion web control es...io-cesc\\applications\\crie3\\controllers/alumnos.py')"
+p88
+sS'func'
+p89
+S'restricted'
+p90
+sa(dp91
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\controllers\\alumnos.py'
+p92
+sg68
+(dp93
+sg74
+I41
+sg75
+(dp94
+I32
+S'    count2 =  db(db.alumnos.aso_esp==asesor).select(db.alumnos.escuela, distinct=True)'
+p95
+sI33
+S'    for Rows in count2:'
+p96
+sI34
+S'             contar_esc = contar_esc + 1'
+p97
+sI35
+S'#busca el numero de docentes en cada escuela'
+p98
+sI36
+S'    tmps = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.prof_aula, distinct = (db.alumnos.grupo))'
+p99
+sI37
+S'    for Rows in tmps:'
+p100
+sI38
+S'             contar_doc = contar_doc + 1'
+p101
+sI39
+S'    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2)'
+p102
+sI30
+S'             contador = contador + 1'
+p103
+sI31
+S'#busca los escuelas que coincidan con asesor'
+p104
+ssg87
+S'()'
+p105
+sg89
+S'<module>'
+p106
+sa(dp107
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\globals.py'
+p108
+sg68
+(dp109
+S'self'
+p110
+S'undefined'
+p111
+sS'f'
+S'<function estadistica>'
+p112
+ssg74
+I417
+sg75
+(dp113
+I416
+S'        self._vars = None'
+p114
+sI417
+S'        self._caller = lambda f: f()'
+p115
+sI418
+S'        self._view_environment = None'
+p116
+sI419
+S'        self._custom_commit = None'
+p117
+sI420
+S'        self._custom_rollback = None'
+p118
+sI421
+S"        self.generic_patterns = ['*']"
+p119
+sI412
+S"        self.flash = ''            # used by the default view layout"
+p120
+sI413
+S'        self.meta = Storage()      # used by web2py_ajax.html'
+p121
+sI414
+S'        self.menu = []             # used by the default view layout'
+p122
+sI415
+S'        self.files = []            # used by web2py_ajax.html'
+p123
+ssg87
+S'(f=<function estadistica>)'
+p124
+sg89
+S'<lambda>'
+p125
+sa(dp126
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\controllers\\alumnos.py'
+p127
+sg68
+(dp128
+S'db.alumnos.grupo'
+p129
+S'<pydal.objects.Field object>'
+p130
+sS'db.alumnos.aso_esp'
+p131
+S'<pydal.objects.Field object>'
+p132
+sS'distinct'
+p133
+g111
+sS'db.alumnos.escuela'
+p134
+S'<pydal.objects.Field object>'
+p135
+sS'asesor2'
+p136
+S"'3'"
+p137
+sS').select'
+p138
+g111
+sS'db.alumnos.prof_aula'
+p139
+S'<pydal.objects.Field object>'
+p140
+sS'db.alumnos'
+p141
+S'<Table alumnos (id, clv_e, nombre, curp, direcci...so, prof_aula, aso_esp, observaciones, fech_mod)>'
+p142
+sS'asesor'
+p143
+S"'taegui'"
+p144
+sS'global db'
+p145
+S'<DAL uri="sqlite://storage.sqlite">'
+p146
+sS'tmps'
+p147
+g111
+ssg74
+I36
+sg75
+(dp148
+I32
+S'    count2 =  db(db.alumnos.aso_esp==asesor).select(db.alumnos.escuela, distinct=True)'
+p149
+sI33
+S'    for Rows in count2:'
+p150
+sI34
+S'             contar_esc = contar_esc + 1'
+p151
+sI35
+S'#busca el numero de docentes en cada escuela'
+p152
+sI36
+S'    tmps = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.prof_aula, distinct = (db.alumnos.grupo))'
+p153
+sI37
+S'    for Rows in tmps:'
+p154
+sI38
+S'             contar_doc = contar_doc + 1'
+p155
+sI39
+S'    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2)'
+p156
+sI30
+S'             contador = contador + 1'
+p157
+sI31
+S'#busca los escuelas que coincidan con asesor'
+p158
+ssg87
+S'()'
+p159
+sg89
+S'estadistica'
+p160
+sa(dp161
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\objects.py'
+p162
+sg68
+(dp163
+S'self.query'
+p164
+S"<Query ((alumnos.aso_esp = 'taegui') AND (alumnos.escuela = '3'))>"
+p165
+sS'adapter.select'
+p166
+S'<bound method SQLiteAdapter.select of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p167
+sS'fields'
+p168
+S'[<pydal.objects.Field object>]'
+p169
+sS'adapter'
+p170
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p171
+sS'attributes'
+p172
+S"{'distinct': <pydal.objects.Field object>}"
+p173
+sS'self'
+p174
+S"<Set ((alumnos.aso_esp = 'taegui') AND (alumnos.escuela = '3'))>"
+p175
+ssg74
+I2020
+sg75
+(dp176
+I2016
+S"                                    attributes.get('left', None),"
+p177
+sI2017
+S"                                    attributes.get('orderby', None),"
+p178
+sI2018
+S"                                    attributes.get('groupby', None))"
+p179
+sI2019
+S'        fields = adapter.expand_all(fields, tablenames)'
+p180
+sI2020
+S'        return adapter.select(self.query, fields, attributes)'
+p181
+sI2021
+S''
+sI2022
+S'    def iterselect(self, *fields, **attributes):'
+p182
+sI2023
+S'        adapter = self.db._adapter'
+p183
+sI2024
+S'        tablenames = adapter.tables(self.query,'
+p184
+sI2015
+S"                                    attributes.get('join', None),"
+p185
+ssg87
+S"(self=<Set ((alumnos.aso_esp = 'taegui') AND (alumnos.escuela = '3'))>, *fields=[<pydal.objects.Field object>], **attributes={'distinct': <pydal.objects.Field object>})"
+p186
+sg89
+S'select'
+p187
+sa(dp188
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\sqlite.py'
+p189
+sg68
+(dp190
+S'fields'
+p191
+S'[<pydal.objects.Field object>]'
+p192
+sS'self'
+p193
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p194
+sS').select'
+p195
+S'<bound method SQLiteAdapter.select of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p196
+sS'attributes'
+p197
+S"{'distinct': <pydal.objects.Field object>}"
+p198
+sS'global SQLiteAdapter'
+p199
+S"<class 'pydal.adapters.sqlite.SQLiteAdapter'>"
+p200
+sS'query'
+p201
+S"<Query ((alumnos.aso_esp = 'taegui') AND (alumnos.escuela = '3'))>"
+p202
+sS'builtinsuper'
+p203
+S"<type 'super'>"
+p204
+ssg74
+I123
+sg75
+(dp205
+I118
+S'        Note that the entire database, rather than one record, is locked'
+p206
+sI119
+S'        (it will be locked eventually anyway by the following UPDATE).'
+p207
+sI120
+S'        """'
+p208
+sI121
+S"        if attributes.get('for_update', False) and not 'cache' in attributes:"
+p209
+sI122
+S"            self.execute('BEGIN IMMEDIATE TRANSACTION;')"
+p210
+sI123
+S'        return super(SQLiteAdapter, self).select(query, fields, attributes)'
+p211
+sI124
+S''
+sI125
+S''
+sI126
+S'SPATIALLIBS = {'
+p212
+sI127
+S"    'Windows':'mod_spatialite.dll',"
+p213
+ssg87
+S"(self=<pydal.adapters.sqlite.SQLiteAdapter object>, query=<Query ((alumnos.aso_esp = 'taegui') AND (alumnos.escuela = '3'))>, fields=[<pydal.objects.Field object>], attributes={'distinct': <pydal.objects.Field object>})"
+p214
+sg89
+g187
+sa(dp215
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p216
+sg68
+(dp217
+S'fields'
+p218
+S'[<pydal.objects.Field object>]'
+p219
+sS'self'
+p220
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p221
+sS'attributes'
+p222
+S"{'distinct': <pydal.objects.Field object>}"
+p223
+sS'self._select_aux'
+p224
+S'<bound method SQLiteAdapter._select_aux of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p225
+sS'sql'
+p226
+S'"SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));"'
+p227
+ssg74
+I1296
+sg75
+(dp228
+I1291
+S'            return cache_model('
+p229
+sI1292
+S'                key,'
+p230
+sI1293
+S'                lambda self=self,args=args:self._select_aux(*args),'
+p231
+sI1294
+S'                time_expire)'
+p232
+sI1295
+S'        else:'
+p233
+sI1296
+S'            return self._select_aux(sql,fields,attributes)'
+p234
+sI1297
+S''
+sI1298
+S'    def iterselect(self, query, fields, attributes):'
+p235
+sI1299
+S'        sql = self._select(query, fields, attributes)'
+p236
+sI1300
+S"        cacheable = attributes.get('cacheable', False)"
+p237
+ssg87
+S"(self=<pydal.adapters.sqlite.SQLiteAdapter object>, query=<Query ((alumnos.aso_esp = 'taegui') AND (alumnos.escuela = '3'))>, fields=[<pydal.objects.Field object>], attributes={'distinct': <pydal.objects.Field object>})"
+p238
+sg89
+g187
+sa(dp239
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p240
+sg68
+(dp241
+S'self'
+p242
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p243
+sS'self.execute'
+p244
+S'<bound method SQLiteAdapter.execute of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p245
+sS'sql'
+p246
+S'"SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));"'
+p247
+ssg74
+I1253
+sg75
+(dp248
+I1248
+S''
+sI1249
+S'    def _select_aux(self, sql, fields, attributes):'
+p249
+sI1250
+S'        args_get = attributes.get'
+p250
+sI1251
+S"        cache = args_get('cache',None)"
+p251
+sI1252
+S'        if not cache:'
+p252
+sI1253
+S'            self.execute(sql)'
+p253
+sI1254
+S'            rows = self._fetchall()'
+p254
+sI1255
+S'        else:'
+p255
+sI1256
+S'            if isinstance(cache, dict):'
+p256
+sI1257
+S"                cache_model = cache['model']"
+p257
+ssg87
+S'(self=<pydal.adapters.sqlite.SQLiteAdapter object>, sql="SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));", fields=[<pydal.objects.Field object>], attributes={\'distinct\': <pydal.objects.Field object>})'
+p258
+sg89
+S'_select_aux'
+p259
+sa(dp260
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p261
+sg68
+(dp262
+S'a'
+S'("SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));",)'
+p263
+sS'self'
+p264
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p265
+sS'b'
+g21
+sS'self.log_execute'
+p266
+S'<bound method SQLiteAdapter.log_execute of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p267
+ssg74
+I1388
+sg75
+(dp268
+I1383
+S'        self.db._timings.append((command,time.time()-t0))'
+p269
+sI1384
+S'        del self.db._timings[:-TIMINGSSIZE]'
+p270
+sI1385
+S'        return ret'
+p271
+sI1386
+S''
+sI1387
+S'    def execute(self, *a, **b):'
+p272
+sI1388
+S'        return self.log_execute(*a, **b)'
+p273
+sI1389
+S''
+sI1390
+S'    def execute_test_query(self):'
+p274
+sI1391
+S'        return self.execute(self.test_query)'
+p275
+sI1392
+S''
+ssg87
+S'(self=<pydal.adapters.sqlite.SQLiteAdapter object>, *a=("SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));",), **b={})'
+p276
+sg89
+S'execute'
+p277
+sa(dp278
+g66
+S'C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p279
+sg68
+(dp280
+S'a'
+S'("SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));",)'
+p281
+sS'b'
+g21
+sS'self'
+p282
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p283
+sS'ret'
+p284
+g111
+sS'command'
+p285
+S'"SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));"'
+p286
+sS'self.get_cursor'
+p287
+S'<bound method SQLiteAdapter.get_cursor of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p288
+sS').execute'
+p289
+g111
+ssg74
+I1382
+sg75
+(dp290
+I1377
+S'            command = self.filter_sql_command(command)'
+p291
+sI1378
+S'        if self.db._debug:'
+p292
+sI1379
+S"            self.db.logger.debug('SQL: %s' % command)"
+p293
+sI1380
+S'        self.db._lastsql = command'
+p294
+sI1381
+S'        t0 = time.time()'
+p295
+sI1382
+S'        ret = self.get_cursor().execute(command, *a[1:], **b)'
+p296
+sI1383
+S'        self.db._timings.append((command,time.time()-t0))'
+p297
+sI1384
+S'        del self.db._timings[:-TIMINGSSIZE]'
+p298
+sI1385
+S'        return ret'
+p299
+sI1386
+S''
+ssg87
+S'(self=<pydal.adapters.sqlite.SQLiteAdapter object>, *a=("SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));",), **b={})'
+p300
+sg89
+S'log_execute'
+p301
+sasS'pyver'
+p302
+S'Python 2.7.11: C:\\Python27\\python.exe (prefix: C:\\Python27)'
+p303
+sS'session'
+p304
+g61
+(S's\x1a\x00\x00\x00<div><table></table></div>'
+tRp305
+sS'etype'
+p306
+S"<class 'sqlite3.OperationalError'>"
+p307
+sS'date'
+p308
+S'Wed Jun 22 12:57:58 2016'
+p309
+sS'response'
+p310
+g61
+(S's\x0e@\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x09A57180&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_crie3</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap3_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>*</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">google_analytics_id</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">logo</td><td style="vertical-align:top;">:</td><td><div><a class="navbar-brand" href="http://www.web2py.com/" id="web2py-logo"><b>web<span>2</span>py</b>&trade;&nbsp;</a></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div><table><tr><td><div>Inicio</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/crie3/default/index</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Mis Sitios</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/site</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Esta Aplicaci\xc3\xb3n</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>#</div></td></tr><tr><td><div><table><tr><td><div><table><tr><td><div>Design</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/design/crie3</div></td></tr></table></div></td></tr><tr><td><div><li class="divider"></li></div></td></tr><tr><td><div><table><tr><td><div>Controlador</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/controllers/alumnos.py</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Vista</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/views/alumnos/estadistica.html</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Modelo BDD</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/models/db.py</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Modelo "menu"</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/models/menu.py</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Config.ini</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/private/appconfig.ini</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Dise\xc3\xb1o de p\xc3\xa1gina</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/views/layout.html</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Hoja de estilo</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/edit/crie3/static/css/web2py-bootstrap3.css</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Base de datos</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/crie3/appadmin/index</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Errores</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/errors/crie3</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Acerca de</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/admin/default/about/crie3</div></td></tr></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>web2py.com</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>#</div></td></tr><tr><td><div><table><tr><td><div><table><tr><td><div>Descargas</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/examples/default/download</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Soporte</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/examples/default/support</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Demostraci\xc3\xb3n</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://web2py.com/demo_admin</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Ejemplos R\xc3\xa1pidos</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://web2py.com/examples/default/examples</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>FAQ</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://web2py.com/AlterEgo</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>V\xc3\xaddeos</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/examples/default/videos/</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Aplicaciones Libres</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://web2py.com/appliances</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Plugins</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://web2py.com/plugins</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Recetas</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://web2pyslices.com/</div></td></tr></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Documentaci\xc3\xb3n</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>#</div></td></tr><tr><td><div><table><tr><td><div><table><tr><td><div>Online book</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book</div></td></tr></table></div></td></tr><tr><td><div><li class="divider"></li></div></td></tr><tr><td><div><table><tr><td><div>Prefacio</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/00</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Introducci\xc3\xb3n</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/01</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Python</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/02</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Resumen</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/03</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>El N\xc3\xbacleo</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/04</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Las Vistas</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/05</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Base de datos</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/06</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Formularios y validadores</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/07</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Correo electr\xc3\xb3nico y SMS</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/08</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Control de Acceso</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/09</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Servicios</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/10</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Recetas AJAX</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/11</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Componentes y Plugins</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/12</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Recetas de despliegue</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/13</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Otras Recetas</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/14</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Helping web2py</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/book/default/chapter/15</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Buy web2py\'s book</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://stores.lulu.com/web2py</div></td></tr></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Comunidad</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>None</div></td></tr><tr><td><div><table><tr><td><div><table><tr><td><div>Grupos</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://www.web2py.com/examples/default/usergroups</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Twitter</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://twitter.com/web2py</div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Chat en vivo</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>http://webchat.freenode.net/?channels=web2py</div></td></tr></table></div></td></tr></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">author</td><td style="vertical-align:top;">:</td><td><div>Your Name &lt;you@example.com&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">description</td><td style="vertical-align:top;">:</td><td><div>a cool new app</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generator</td><td style="vertical-align:top;">:</td><td><div>Web2py Web Framework</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">keywords</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>web2py</div></td></tr><tr><td><div>python</div></td></tr><tr><td><div>framework</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^alumnos/\\w+\\.py$</div></td></tr><tr><td><div>^alumnos/estadistica/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_crie3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;C:\\\\Users\\\\CRIE\\\\OneDrive\\\\aplicacion web control escolar\\\\web2py-biblio-cesc\\\\applications\\\\crie3\\\\sessions\\\\176\\\\1c2\\\\127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917&#x27;, mode &#x27;rb+&#x27; at 0x09DB3EE8&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\sessions\\127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>2b8878460a562f075fc8e73208441273</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-26995327-cbcd-4dbe-b9de-3b7023511917</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_crie3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>crie3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">subtitle</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">title</td><td style="vertical-align:top;">:</td><td><div>Crie3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>alumnos/estadistica.html</div></td></tr></table></div>'
+tRp311
+sS'locals'
+p312
+(dp313
+S'a'
+S'("SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));",)'
+p314
+sS'self'
+p315
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p316
+sS'b'
+g21
+sS'command'
+p317
+S'"SELECT DISTINCT ON (alumnos.grupo) alumnos.prof_...aso_esp = \'taegui\') AND (alumnos.escuela = \'3\'));"'
+p318
+sS't0'
+p319
+S'1466618277.989'
+p320
+sssS'traceback'
+p321
+S'Traceback (most recent call last):\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\controllers/alumnos.py", line 41, in <module>\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\globals.py", line 417, in <lambda>\n    self._caller = lambda f: f()\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\applications\\crie3\\controllers/alumnos.py", line 36, in estadistica\n    tmps = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.prof_aula, distinct = (db.alumnos.grupo))\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\objects.py", line 2020, in select\n    return adapter.select(self.query, fields, attributes)\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\sqlite.py", line 123, in select\n    return super(SQLiteAdapter, self).select(query, fields, attributes)\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1296, in select\n    return self._select_aux(sql,fields,attributes)\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1253, in _select_aux\n    self.execute(sql)\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1388, in execute\n    return self.log_execute(*a, **b)\n  File "C:\\Users\\CRIE\\OneDrive\\aplicacion web control escolar\\web2py-biblio-cesc\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1382, in log_execute\n    ret = self.get_cursor().execute(command, *a[1:], **b)\nOperationalError: near "ON": syntax error\n'
+p322
+s.
