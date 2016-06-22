@@ -534,3 +534,9 @@
 [2016-06-16 14:53:03] EDIT biblioteca/controllers/default.py: 0
 [2016-06-16 14:55:33] EDIT biblioteca/views/default/estadistica.html: 4
 [2016-06-16 14:58:40] EDIT biblioteca/views/default/estadistica.html: 0
+[2016-06-22 08:42:29] EDIT biblioteca/controllers/default.py: -2
+[2016-06-22 08:43:08] EDIT biblioteca/views/default/estadistica.html: -3
+[2016-06-22 08:43:15] EDIT biblioteca/views/default/estadistica.html: -4
+[2016-06-22 08:44:20] EDIT biblioteca/controllers/default.py: 0
+[2016-06-22 08:45:00] EDIT biblioteca/controllers/default.py: 1
+[2016-06-22 08:45:20] EDIT biblioteca/controllers/default.py: -1

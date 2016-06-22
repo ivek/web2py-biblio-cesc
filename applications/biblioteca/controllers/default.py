@@ -19,24 +19,22 @@ def estadistica():
     contador = 0
     supl=""
     base = db(db.biblioteca).select()
-    fo=FORM('Tu nombre:', INPUT(_name='nombre', _value='', _id="nom"), INPUT(_type='submit', _id="boton"))
-    if fo.accepts(request,session):
-        supl = "resultado"+ str(fo.element('#nom')['_value'])
-        response.flash="form accepted"
-      
-    elif fo.errors:
-        response.flash="form is invalid"
-    else:
-        response.flash="please fill the form"
     
     formulario= FORM(TR("busquedar :", 
           SELECT(_name='selecion', 
           *[OPTION(base[i].genero, _value=str(base[i].id)) for i in range(len(base))])),
           TR(INPUT(_type='submit')))
+    if formulario.accepts(request,session):
+        response.flash="form accepted"
+      
+    elif formulario.errors:
+        response.flash="form is invalid"
+    else:
+        response.flash="please fill the form"
     count = db.biblioteca.id.count() 
     for row in db(db.biblioteca.genero == "Ciencias").select(db.biblioteca.titulo, count, groupby=db.biblioteca.genero):
         contador = contador +  row[count]
-    return dict(contador=contador, supl=supl, fo=fo,formulario=formulario)
+    return dict(contador=contador,formulario=formulario)
 
 
 
