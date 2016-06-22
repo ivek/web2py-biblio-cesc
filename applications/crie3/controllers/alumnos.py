@@ -22,9 +22,8 @@ def estadistica():
 #hace la contabilidad del elemento seleccionado
     asesor = request.vars.seleccion
     asesor2 = request.vars.seleccion2
-    count = db.alumnos.escuela.count()
-    for row in db(db.alumnos.aso_esp!=request.vars.seleccion).select(db.alumnos.escuela, count, groupby=db.alumnos.escuela):
-         for i in db(db.alumnos.escuela==request.vars.seleccion2).select(db.alumnos.escuela, count, groupby=db.alumnos.escuela):
-            if  i == request.vars.seeccion2:
-                contador = contador +  row[count]
-    return dict(contador=contador, formulario=formulario, asesor2=asesor2,   asesor = asesor)
+    count =  db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select()
+    count2 = db.alumnos.escuela.count()
+    for Rows in count:
+             contador = contador + 1
+    return dict(contador=contador, formulario=formulario, asesor=asesor,asesor2=asesor2)
