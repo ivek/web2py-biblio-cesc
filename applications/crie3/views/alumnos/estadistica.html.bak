@@ -16,7 +16,7 @@
         <td>No. Maestros en la escuela: {{=contar_doc}}</td>
     </tr>
     <tr>
-        <td>No. padres en la escuela: {{contar_pdrs or 'no se encuentra'}} </td>
+        <td>No. padres en la escuela: {{=contar_pdrs or 'no se encuentra'}} </td>
     </tr>
    </table>
    <table  id="result">
@@ -25,6 +25,6 @@
        <th>Clave</th>
        <th>Grado</th>
        <th>Grupo</th>
-       <th>Total</th>
+       <th>Total: {{}=contar_gpo or 'no se encuentra'}</th>
     </tr>
 </table>
