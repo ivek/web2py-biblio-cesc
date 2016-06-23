@@ -1,7 +1,7 @@
 {{extend 'layout.html'}}
 <h1>Alumnos registrados</h1>
 <ul>
-{{for alumno in alumnos:}}
-{{=LI(A(alumno.nombre, _href=URL("mostrar", args=alumno.id)))}}
+{{for alumnos in alumno:}}
+{{=LI(A(alumnos.nombre, _href=URL("mostrar", args=alumnos.id)))}}
 {{pass}}
 </ul>

@@ -12,6 +12,7 @@ def estadistica():
     contador = 0
     contar_esc = 0
     contar_doc = 0
+    contar_pdrs = 0
     base = db(db.especialistas).select()
     base2 = db(db.escuela).select()
 # formulario para seleccionar el nombre de elemento a buscar
@@ -24,7 +25,7 @@ def estadistica():
 #hace la contabilidad del elemento seleccionado
     asesor = request.vars.seleccion
     asesor2 = request.vars.seleccion2
-#busca las alumnos y asesor que coincidan
+#busca los alumnos y asesor que coincidan
     count =  db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select()
     for Rows in count:
              contador = contador + 1
@@ -36,4 +37,8 @@ def estadistica():
     tmps = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.prof_aula, distinct=True)
     for Rows in tmps:
              contar_doc = contar_doc + 1
-    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2)
+#busca los padres en cada escuela         
+    padre = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.padres, distinct=True)
+    for Rows in padre:
+             contar_pdrs=contar_pdrs + 1
+    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_pdrs=contar_pdrs,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2)
