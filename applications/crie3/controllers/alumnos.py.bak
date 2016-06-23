@@ -14,6 +14,9 @@ def estadistica():
     contar_doc = 0
     contar_pdrs = 0
     contar_gpo = 0
+    contar_grup={'a': 0,'b': 0,'c': 0,'d': 0,'e': 0,'f': 0}
+    gpo=['a','b','c','d','e','f']
+    tab_alum=[]
     base = db(db.especialistas).select()
     base2 = db(db.escuela).select()
 # formulario para seleccionar el nombre de elemento a buscar
@@ -43,7 +46,12 @@ def estadistica():
     for Rows in padres:
              contar_pdrs=contar_pdrs + 1
 #despliega la estadistica por grado y grupo         
-    despliegue = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.grupo, distinct=True)
+    despliegue = db((db.alumnos.aso_esp==asesor) & (db.alumnos.escuela==asesor2)).select(db.alumnos.ALL)
+    
     for Rows in despliegue:
-             contar_gpo=contar_gpo + 1
-    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_pdrs=contar_pdrs,contar_gpo=contar_gpo,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2)
+        for g in gpo:
+            if Rows.grupo == g:
+                tab_alum= Rows.grupo
+                contar_grup[g]=contar_grup[g]+1
+                contar_gpo=contar_gpo + 1
+    return dict(contador=contador, formulario=formulario, contar_esc = contar_esc,contar_pdrs=contar_pdrs,contar_gpo=contar_gpo,contar_doc = contar_doc, asesor=asesor,asesor2=asesor2,contar_grup=contar_grup,tab_alum=tab_alum,gpo=gpo)

@@ -20,11 +20,14 @@
     </tr>
    </table>
    <table  id="result">
-     <tr>
-       <th>Nivel</th> 
-       <th>Clave</th>
-       <th>Grado</th>
-       <th>Grupo</th>
-       <th>Total: {{}=contar_gpo or 'no se encuentra'}</th>
-    </tr>
+  
+      
 </table>
+
+
+<h2>
+{{for g in gpo:}} 
+    {{if tab_alum == g:}}<b>{{=g}}</b>
+    {{else:}}{{=g}}
+{{pass}}
+</h2>
