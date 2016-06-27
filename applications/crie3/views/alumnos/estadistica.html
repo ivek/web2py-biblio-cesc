@@ -19,17 +19,20 @@
         <td>No. padres en la escuela: {{=contar_pdrs or 'no se encuentra'}} </td>
     </tr>
    </table>
-   <table  id="result">
+   <table  border="4px" id="result">
+       <tr><td>Grado</td>
+      <td>Grupo</td>
+      <td>Total</td> </tr>
      {{for x in gdo:}}
          {{if x == Rows.grado:}} 
                {{y=""}}
-                {{for g in tab_alum:}}
+                {{for g in tab_alum:}}                 
                    {{if g != y:}}
                      {{y=g}}
-                 <tr>
-                   <td>Grado:{{=x}}</td>
-                   <td>Grupo:{{=g}}</td>
-                    <td>Total:{{=contar_grup[g]}}
+                 <tr>       
+                   <td>{{=x}}</td>
+                   <td>{{=g}}</td>
+                    <td>{{=contar_grup[g]}}                     
              {{pass}} {{pass}}{{pass}}{{pass}}</td>
            </tr>
       
